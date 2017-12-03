@@ -1,13 +1,13 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-//const router = require('./routes.js');
+const router = require('./routes.js');
 
 const app = express();
 const client = path.join(__dirname, '../client/public');
 
 app.use(bodyParser.json());
-//app.use('/api', router);
+app.use('/api', router);
 app.use(express.static(client));
 
 app.listen(3000);
