@@ -3,6 +3,7 @@ import { CardTitle, CardActions} from 'material-ui/Card'
 import { TextField, RaisedButton } from 'material-ui'
 import { connect } from 'react-redux'
 import {updateField} from '../actions'
+import axios from 'axios'
 
 const CARD_ACTIONS_STYLE = {textAlign: "right"}
 
@@ -36,8 +37,10 @@ const CreateUserProfile = ({ username, password, email, fieldOnChange}) => {
     )
 }
 
-function save(...state) {
-    console.log(...state)
+function save(username, password, email) {
+    axios.post('/api/profiles', {fields: {username, password, email}})
+    .then((res) => console.log(res.data))
+    .catch((error) => console.log(error))
 }
 
 const mapStateToProps = state => {
