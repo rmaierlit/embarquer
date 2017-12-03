@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { createStore } from 'redux'
@@ -20,10 +20,10 @@ function App() {
     <MuiThemeProvider>
       <Provider store={store}>
         <Router>
-          <Switch>
+          <div>
             <Route exact path="/" component={Landing} />
             <Route path="/onboard" component={Main} />
-          </Switch>
+          </div>
         </Router>
       </Provider>
     </MuiThemeProvider>

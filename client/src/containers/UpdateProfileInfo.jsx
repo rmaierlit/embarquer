@@ -7,48 +7,48 @@ import axios from 'axios'
 
 const CARD_ACTIONS_STYLE = {textAlign: "right"}
 
-const CreateUserProfile = ({ username, password, email, fieldOnChange}) => {
+const UpdateProfileInfo = ({ first_name, last_name, telephone, fieldOnChange}) => {
     return (
         <div >
-            <CardTitle title="Create User Profile" />
+            <CardTitle title="Personal Information" />
             <TextField
-                name="username"
-                floatingLabelText="Username"
-                value={username}
+                name="first_name"
+                floatingLabelText="First Name"
+                value={first_name}
                 onChange={fieldOnChange}
             /> <br />
             <TextField
-                name="password"
-                floatingLabelText="Password"
-                value={password}
+                name="last_name"
+                floatingLabelText="Last Name"
+                value={last_name}
                 onChange={fieldOnChange}
             /> <br />
             <TextField
-                name="email"
-                floatingLabelText="Email Address"
-                value={email}
+                name="telephone"
+                floatingLabelText="Telephone Number"
+                value={telephone}
                 onChange={fieldOnChange}
             />
             <CardActions style={CARD_ACTIONS_STYLE}>
                 <RaisedButton label="Save" 
-                primary={true} onClick={() => save(username, password, email)}/>
+                primary={true} onClick={() => update(first_name, last_name, telephone)}/>
             </CardActions>
         </div>
     )
 }
 
-function save(username, password, email) {
-    axios.post('/api/profiles', {fields: {username, password, email}})
-    .then((res) => console.log(res.data))
-    .catch((error) => console.log(error))
+function update(first_name, last_name, telephone) {
+    // axios.post('/api/profiles', {fields: {username, password, email}})
+    // .then((res) => console.log(res.data))
+    // .catch((error) => console.log(error))
 }
 
 const mapStateToProps = state => {
     let profile = state.userProfile
     return {
-        username: profile.username,
-        password: profile.password,
-        email: profile.email,
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        telephone: profile.telephone,
     }
 }
 
@@ -62,4 +62,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateUserProfile)
+)(UpdateProfileInfo)

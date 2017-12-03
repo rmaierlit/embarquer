@@ -7,7 +7,7 @@ function Landing() {
     return (
         <div style={STYLE}>
             <h1>Embarquer</h1>
-            <Link to="/onboard"> Begin </Link>
+            <Link to="/onboard/step1"> Begin </Link>
         </div>
     )
 }
