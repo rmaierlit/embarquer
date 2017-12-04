@@ -80,7 +80,6 @@ routes.put('/profiles/:username', (req, res) => {
             fieldValues.push(username)
             //update profile
             const query = `UPDATE profiles SET ${fieldSetter} WHERE username=$${fields.length + 1}`
-            console.log(query)
             await client.query(query, fieldValues)
         } catch (error) {
             return res.status(500).json(error)
