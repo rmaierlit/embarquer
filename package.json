@@ -26,6 +26,8 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
+    "dbinit": "node server/models/database.js",
+    "prestart": "webpack",
     "start": "node server/server.js"
   },
   "repository": {

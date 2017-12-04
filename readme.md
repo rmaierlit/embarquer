@@ -7,7 +7,7 @@ Create an _embarquer-dev_ database and edit the user or password in _server/cons
 Then run these commands:
 ````
 npm install
-node server/models/database.js
+npm run dbinit
 npm start
 ````
 
