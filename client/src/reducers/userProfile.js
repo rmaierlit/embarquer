@@ -8,7 +8,13 @@ const initialState = {
     first_name: '',
     last_name: '',
     telephone: '',
+    street_address: '',
+    city: '',
+    state: '',
+    zip_code: '55555',
     profileComplete: false,
+    personalComplete: false,
+    addressComplete: false,
 }
 
 function createProfile(username, password, email) {

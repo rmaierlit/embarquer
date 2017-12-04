@@ -42,7 +42,7 @@ routes.post('/profiles', (req, res) => {
         try{
             //obtain list of all profiles for response
             const query = await client.query('SELECT username FROM profiles ORDER BY username ASC')
-            for (row of query.rows) {
+            for (let row of query.rows) {
                 results.push(row)
             }
         } catch (error) {
@@ -59,7 +59,7 @@ routes.put('/profiles/:username', (req, res) => {
     const fields = Object.keys(req.body.fields).filter(key => UPDATE_FIELDS.has(key))
     //obtain the data from these valid fields
     let profileData = {}
-    for (field of fields) {
+    for (let field of fields) {
         profileData[field] = req.body.fields[field]
     }
 
