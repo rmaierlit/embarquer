@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import {updateField} from '../actions'
 import ProfileForm from '../components/ProfileForm'
 
-function InfoContainer(fieldNames, nextPath, completeFlag, checkStatus){
+function InfoContainer(title, fieldNames, nextPath, completeFlag, checkStatus){
 
     const mapStateToProps = state => {
         let profile = state.userProfile
@@ -11,6 +11,7 @@ function InfoContainer(fieldNames, nextPath, completeFlag, checkStatus){
             fields[fieldName] = profile[fieldName]
         }
         return {
+            title,
             fields,
             complete: profile[completeFlag],
             fieldNameList: fieldNames,

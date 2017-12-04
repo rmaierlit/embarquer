@@ -6,10 +6,10 @@ import TextFieldList from './TextFieldList'
 
 const CARD_ACTIONS_STYLE = {textAlign: "right"}
 
-const ProfileForm = ({fields, complete, fieldNameList, nextPath, fieldOnChange, onSave}) => {
+const ProfileForm = ({title, fields, complete, fieldNameList, nextPath, fieldOnChange, onSave}) => {
     return (
         <div >
-            <CardTitle title="Create User Profile" />
+            <CardTitle title={title} />
             <TextFieldList fields={fields} fieldNameList={fieldNameList} onChange={fieldOnChange}/>
             <Redirector destination={nextPath} complete={complete} />
             <CardActions style={CARD_ACTIONS_STYLE}>
