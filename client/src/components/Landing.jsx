@@ -1,9 +1,12 @@
 import React from "react"
-import {Link} from "react-router-dom"
+import { connect } from "react-redux"
+import { reset } from "../actions"
+import { Link } from "react-router-dom"
 
 const STYLE = {textAlign: "center", marginTop:"33vh"}
 
-function Landing() {
+function Landing({ dispatch }) {
+    dispatch(reset())
     return (
         <div style={STYLE}>
             <h1>Embarquer</h1>
@@ -11,5 +14,7 @@ function Landing() {
         </div>
     )
 }
+
+Landing = connect()(Landing)
 
 export default Landing
