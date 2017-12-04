@@ -2,10 +2,6 @@ import { connect } from 'react-redux'
 import {updateField} from '../actions'
 import ProfileForm from '../components/ProfileForm'
 
-const FIELD_NAMES = ['street_address', 'city', 'state', 'zip_code']
-const NEXT_PATH = '/'
-const completeFlag = 'addressComplete'
-
 function InfoContainer(fieldNames, nextPath, completeFlag, checkStatus){
 
     const mapStateToProps = state => {
