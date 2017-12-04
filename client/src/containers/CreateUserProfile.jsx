@@ -2,7 +2,6 @@ import React from 'react'
 import { CardTitle, CardActions} from 'material-ui/Card'
 import { TextField, RaisedButton } from 'material-ui'
 import { connect } from 'react-redux'
-import axios from 'axios'
 import {updateField, checkProfile} from '../actions'
 import Redirector from '../components/Redirector'
 
@@ -40,12 +39,6 @@ const CreateUserProfile = ({ username, password, email, complete, fieldOnChange,
 }
 
 CreateUserProfile.componentShouldUpdate = () => console.log(arguments)
-
-function save(username, password, email) {
-    axios.post('/api/profiles', {fields: {username, password, email}})
-    .then((res) => console.log(res.data))
-    .catch((error) => console.log(error))
-}
 
 const mapStateToProps = state => {
     let profile = state.userProfile

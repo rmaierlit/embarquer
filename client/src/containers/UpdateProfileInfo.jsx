@@ -2,12 +2,12 @@ import React from 'react'
 import { CardTitle, CardActions} from 'material-ui/Card'
 import { TextField, RaisedButton } from 'material-ui'
 import { connect } from 'react-redux'
-import {updateField} from '../actions'
-import axios from 'axios'
+import {updateField, checkInfo} from '../actions'
+import Redirector from '../components/Redirector'
 
 const CARD_ACTIONS_STYLE = {textAlign: "right"}
 
-const UpdateProfileInfo = ({ first_name, last_name, telephone, fieldOnChange}) => {
+const UpdateProfileInfo = ({first_name, last_name, telephone, fieldOnChange, onSave}) => {
     return (
         <div >
             <CardTitle title="Personal Information" />
@@ -29,18 +29,13 @@ const UpdateProfileInfo = ({ first_name, last_name, telephone, fieldOnChange}) =
                 value={telephone}
                 onChange={fieldOnChange}
             />
+            <Redirector destination="/" complete={false} />
             <CardActions style={CARD_ACTIONS_STYLE}>
                 <RaisedButton label="Save" 
-                primary={true} onClick={() => update(first_name, last_name, telephone)}/>
+                primary={true} onClick={onSave}/>
             </CardActions>
         </div>
     )
-}
-
-function update(first_name, last_name, telephone) {
-    // axios.post('/api/profiles', {fields: {username, password, email}})
-    // .then((res) => console.log(res.data))
-    // .catch((error) => console.log(error))
 }
 
 const mapStateToProps = state => {
@@ -56,6 +51,9 @@ const mapDispatchToProps = dispatch => ({
     fieldOnChange: (event, value) => {
         let field = event.target.name
         dispatch(updateField(field, value))
+    },
+    onSave: () => {
+        dispatch(checkInfo())
     }
 })
 
