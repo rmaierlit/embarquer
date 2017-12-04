@@ -1,13 +1,13 @@
 import React from 'react'
 import {TextField} from 'material-ui'
-//import LABELS from '../constants/Lables'
+import LABELS from '../constants/Labels'
 
 const TextFieldList = (props) => {
     let textFields = props.fieldNameList.map(fieldName => (
         <div key={fieldName}>
             <TextField
                 name={fieldName}
-                floatingLabelText={fieldName /*LABELS[fieldName]*/}
+                floatingLabelText={LABELS[fieldName]}
                 value={props.fields[fieldName]}
                 onChange={props.onChange}
             />
