@@ -1,4 +1,4 @@
-import {UPDATE_FIELD, CHECK_PROFILE, CHECK_INFO} from "../constants/ActionTypes"
+import {UPDATE_FIELD, CHECK_PROFILE, CHECK_INFO, CHECK_ADDRESS} from "../constants/ActionTypes"
 import axios from "axios"
 
 const initialState = {
@@ -41,10 +41,20 @@ export default function userProfile (state = initialState, action) {
                 return state
             }
         case CHECK_INFO:
-            let {username, first_name, last_name, telephone} = state
-            if (username && [first_name, last_name, telephone].every(value => value !== '')) {
+            let {first_name, last_name, telephone} = state
+            if (state.username && [first_name, last_name, telephone].every(value => value !== '')) {
                 console.log('updating')
-                updateProfile(username, {first_name, last_name, telephone})
+                updateProfile(state.username, {first_name, last_name, telephone})
+                return Object.assign({}, state, {personalComplete: true})
+            } else {
+                return state
+            }
+        case CHECK_ADDRESS:
+            let {street_address, city, zip_code} = state
+            let geoState = state.state //avoids homonym of (Geographical) state and (application) state
+            if (!state.username && [street_address, city, geoState, zip_code].every(value => value !== '')) {
+                console.log('updating:', street_address, city, geoState, zip_code)
+                return Object.assign({}, state, {addressComplete: true})
             } else {
                 return state
             }

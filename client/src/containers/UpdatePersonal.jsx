@@ -2,7 +2,7 @@ import React from 'react'
 import { CardTitle, CardActions} from 'material-ui/Card'
 import { TextField, RaisedButton } from 'material-ui'
 import { connect } from 'react-redux'
-import {updateField, checkInfo} from '../actions'
+import {updateField, checkAddress} from '../actions'
 import Redirector from '../components/Redirector'
 
 const CARD_ACTIONS_STYLE = {textAlign: "right"}
@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(updateField(field, value))
     },
     onSave: () => {
-        dispatch(checkInfo())
+        dispatch(checkAddress())
     }
 })
 
