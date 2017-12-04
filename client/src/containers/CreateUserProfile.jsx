@@ -1,66 +1,8 @@
-import React from 'react'
-import { CardTitle, CardActions} from 'material-ui/Card'
-import { TextField, RaisedButton } from 'material-ui'
-import { connect } from 'react-redux'
-import {updateField, checkProfile} from '../actions'
-import Redirector from '../components/Redirector'
+import InfoContainer from './InfoContainer'
+import {checkUser} from '../actions'
 
-const CARD_ACTIONS_STYLE = {textAlign: "right"}
+const FIELD_NAMES = ['username', 'password', 'email']
+const NEXT_PATH = '/onboard/step2'
+const COMPLETE_FLAG = 'userComplete'
 
-const CreateUserProfile = ({ username, password, email, complete, fieldOnChange, onSave}) => {
-    return (
-        <div >
-            <CardTitle title="Create User Profile" />
-            <TextField
-                name="username"
-                floatingLabelText="Username"
-                value={username}
-                onChange={fieldOnChange}
-            /> <br />
-            <TextField
-                name="password"
-                floatingLabelText="Password"
-                value={password}
-                onChange={fieldOnChange}
-            /> <br />
-            <TextField
-                name="email"
-                floatingLabelText="Email Address"
-                value={email}
-                onChange={fieldOnChange}
-            />
-            <Redirector destination="/onboard/step2" complete={complete} />
-            <CardActions style={CARD_ACTIONS_STYLE}>
-                <RaisedButton label="Save" 
-                primary={true} onClick={onSave}/>
-            </CardActions>
-        </div>
-    )
-}
-
-CreateUserProfile.componentShouldUpdate = () => console.log(arguments)
-
-const mapStateToProps = state => {
-    let profile = state.userProfile
-    return {
-        username: profile.username,
-        password: profile.password,
-        email: profile.email,
-        complete: profile.profileComplete,
-    }
-}
-
-const mapDispatchToProps = dispatch => ({
-    fieldOnChange: (event, value) => {
-        let field = event.target.name
-        dispatch(updateField(field, value))
-    },
-    onSave: () => {
-        dispatch(checkProfile())
-    }
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateUserProfile)
+export default InfoContainer(FIELD_NAMES, NEXT_PATH, COMPLETE_FLAG, checkUser)

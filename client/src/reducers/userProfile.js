@@ -1,4 +1,4 @@
-import {UPDATE_FIELD, CHECK_PROFILE, CHECK_INFO, CHECK_ADDRESS} from "../constants/ActionTypes"
+import {UPDATE_FIELD, CHECK_USER, CHECK_INFO, CHECK_ADDRESS} from "../constants/ActionTypes"
 import axios from "axios"
 
 const initialState = {
@@ -11,8 +11,8 @@ const initialState = {
     street_address: '',
     city: '',
     state: '',
-    zip_code: '55555',
-    profileComplete: false,
+    zip_code: '',
+    userComplete: false,
     personalComplete: false,
     addressComplete: false,
 }
@@ -33,17 +33,16 @@ export default function userProfile (state = initialState, action) {
     switch (action.type) {
         case UPDATE_FIELD:
             return Object.assign({}, state, {[action.field]: action.text})
-        case CHECK_PROFILE:
+        case CHECK_USER:
             if ([state.username, state.password, state.email].every(value => value !== '')) {
                 createProfile(state.username, state.password, state.email)
-                return Object.assign({}, state, {profileComplete: true})
+                return Object.assign({}, state, {userComplete: true})
             } else {
                 return state
             }
         case CHECK_INFO:
             let {first_name, last_name, telephone} = state
             if (state.username && [first_name, last_name, telephone].every(value => value !== '')) {
-                console.log('updating')
                 updateProfile(state.username, {first_name, last_name, telephone})
                 return Object.assign({}, state, {personalComplete: true})
             } else {
@@ -52,8 +51,8 @@ export default function userProfile (state = initialState, action) {
         case CHECK_ADDRESS:
             let {street_address, city, zip_code} = state
             let geoState = state.state //avoids homonym of (Geographical) state and (application) state
-            if (!state.username && [street_address, city, geoState, zip_code].every(value => value !== '')) {
-                console.log('updating:', street_address, city, geoState, zip_code)
+            if (state.username && [street_address, city, geoState, zip_code].every(value => value !== '')) {
+                updateProfile(state.username, {street_address, city, state: geoState, zip_code})
                 return Object.assign({}, state, {addressComplete: true})
             } else {
                 return state
