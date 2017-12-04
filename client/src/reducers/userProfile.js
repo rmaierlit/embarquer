@@ -1,4 +1,4 @@
-import {UPDATE_FIELD, CHECK_USER, CHECK_INFO, CHECK_ADDRESS} from "../constants/ActionTypes"
+import {UPDATE_FIELD, CHECK_USER, CHECK_INFO, CHECK_ADDRESS, RESET} from "../constants/ActionTypes"
 import axios from "axios"
 
 const initialState = {
@@ -57,6 +57,8 @@ export default function userProfile (state = initialState, action) {
             } else {
                 return state
             }
+        case RESET:
+            return initialState
         default:
             return state
     }
